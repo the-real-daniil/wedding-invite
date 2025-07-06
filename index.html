@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"
+      type="text/javascript"
+    ></script>
   </head>
   <body>
     <div class="preloader">
@@ -42,21 +46,20 @@
       <!-- Hero Section -->
       <section class="hero" id="hero">
         <div class="hero-content">
-          <h1 class="names">ДАНИИЛ И ДАРЬЯ</h1>
+          <h1 class="names">ДАРЬЯ И ДАНИИЛ</h1>
           <div class="wedding-date">СЕНТЯБРЬ 2025</div>
           <div class="tagline">ONE LOVE</div>
-          <div class="scroll-down">SCROLL DOWN</div>
+          <div class="scroll-down">ЛИСТАЙТЕ ВНИЗ</div>
         </div>
       </section>
 
       <!-- Welcome Section -->
       <section class="welcome" id="welcome">
         <div class="container">
-          <h2 class="section-title">DEAR GUESTS!</h2>
+          <h2 class="section-title">ДОРОГИЕ ГОСТИ!</h2>
           <p class="welcome-text">
-            We have been waiting for a long time for the moment when we can
-            share with you the most important and happiest day in our lives -
-            the day of our wedding!
+            Мы давно ждали момента, когда вместе с Вами сможем разделить самый
+            важный и счастливый день в нашей жизни - день нашей свадьбы!
           </p>
         </div>
       </section>
@@ -116,49 +119,58 @@
       <!-- Location Section -->
       <section class="location" id="location">
         <div class="container">
-          <h2 class="section-title">LOCATION</h2>
+          <h2 class="section-title">ЛОКАЦИЯ</h2>
+          <p class="location-text">
+            Наша свадьба пройдет в загородном клубе отдыха «Ближняя Дача».
+          </p>
           <div class="location-details">
-            <div class="location-item">
-              <h3 class="location-title">Ceremony</h3>
-              <p class="location-address">
-                The ceremony will take place at:<br />Riverside Wedding Hall<br />123
-                Riverside Drive
-              </p>
-            </div>
-            <div class="location-item">
-              <h3 class="location-title">Ceremony & Banquet</h3>
-              <p class="location-address">
-                Villa Bellissima<br />456 Lakeview Road, Sunnydale
-              </p>
-            </div>
+            <img src="./assets/near_cottage.jpg" />
           </div>
+        </div>
+        <div class="container">
+          <h2 class="section-title">КАК ДОБРАТЬСЯ</h2>
+          <p class="location-text">
+            Мы подготовили для вас карту, чтобы вы точно добрались и порадовали
+            нас своим присутствием
+          </p>
+          <div id="map"></div>
+
+          <p class="location-address">
+            Ближняя Дача<br />
+            ул. Чемордачка, 4А, Ростов-на-Дону
+          </p>
         </div>
       </section>
 
       <!-- Schedule Section -->
       <section class="schedule" id="schedule">
         <div class="container">
-          <h2 class="section-title">SCHEDULE</h2>
+          <h2 class="section-title">РАСПИСАНИЕ</h2>
           <div class="timeline">
-            <div class="timeline-item">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item left">
+              <div class="timeline-dot"></div>
               <div class="timeline-time">16:00</div>
-              <div class="timeline-content">Guest Arrival</div>
+              <div class="timeline-content">Сбор гостей</div>
             </div>
-            <div class="timeline-item">
-              <div class="timeline-time">16:40</div>
-              <div class="timeline-content">Wedding Ceremony</div>
+
+            <div class="timeline-item right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">16:30</div>
+              <div class="timeline-content">Свадебная церемония</div>
             </div>
-            <div class="timeline-item">
+
+            <div class="timeline-item left">
+              <div class="timeline-dot"></div>
               <div class="timeline-time">17:30</div>
-              <div class="timeline-content">Cocktail Hour</div>
+              <div class="timeline-content">Банкет</div>
             </div>
-            <div class="timeline-item">
-              <div class="timeline-time">18:00</div>
-              <div class="timeline-content">Dinner Reception</div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-time">23:00</div>
-              <div class="timeline-content">End of Evening</div>
+
+            <div class="timeline-item right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">22:30</div>
+              <div class="timeline-content">Финал<br />вечера</div>
             </div>
           </div>
         </div>
@@ -167,20 +179,27 @@
       <!-- Dress Code Section -->
       <section class="dress-code" id="dress-code">
         <div class="container">
-          <h2 class="section-title">DRESS CODE</h2>
+          <h2 class="section-title">ДРЕСС-КОД</h2>
           <p class="dress-code-text">
-            We would be grateful if you support the color palette of our
-            celebration in your outfits.
+            Будем благодарны, если в своих нарядах вы поддержите цветовую
+            палитру нашего праздника.
           </p>
+          <div class="color-palette">
+            <div class="color-box" style="background-color: #f2e2d2"></div>
+            <div class="color-box" style="background-color: #d6c7b8"></div>
+            <div class="color-box" style="background-color: #8b5a3c"></div>
+            <div class="color-box" style="background-color: #7d7d5e"></div>
+            <div class="color-box" style="background-color: #000000"></div>
+          </div>
           <div class="dress-code-details">
             <div class="dress-code-item">
               <p>
-                Ladies, please avoid white and bright colors in your outfits if
-                possible.
+                Милые дамы, просим, по возможности, избегать в нарядах белых и
+                ярких оттенков.
               </p>
             </div>
             <div class="dress-code-item">
-              <p>Gentlemen will look great in a black suit and white shirt.</p>
+              <p>Мужчинам отлично подойдет черный костюм и белая рубашка.</p>
             </div>
           </div>
         </div>
@@ -189,69 +208,29 @@
       <!-- Wishes Section -->
       <section class="wishes" id="wishes">
         <div class="container">
-          <h2 class="section-title">WISHES</h2>
+          <h2 class="section-title">ПОЖЕЛАНИЯ</h2>
           <div class="wishes-content">
             <p>
-              If you would like to give us a valuable and necessary gift, we
-              would be very grateful for a contribution to our young family's
-              budget.
+              Если хотите подарить нам ценный и нужный подарок, мы будем очень
+              благодарны за вклад в бюджет нашей молодой семьи.
             </p>
+            <p class="big-tilda">-</p>
             <p>
-              We would like you to have fun and relax on our wedding day, so we
-              decided to arrange a celebration exclusively for adult guests.
+              Приятным комплиментом для нас вместо цветов будет бутылочка вашего
+              любимого вина, которую мы откроем на ближайшем совместном
+              празднике.
             </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Gallery Section -->
-      <section class="gallery" id="gallery">
-        <div class="container">
-          <h2 class="section-title">OUR GALLERY</h2>
-          <div class="gallery-grid">
-            <!-- Replace with actual images -->
-            <div class="gallery-item">
-              <img
-                src="https://via.placeholder.com/400x600"
-                alt="Couple Photo 1"
-                class="gallery-img"
-              />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="https://via.placeholder.com/400x400"
-                alt="Couple Photo 2"
-                class="gallery-img"
-              />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="https://via.placeholder.com/400x600"
-                alt="Couple Photo 3"
-                class="gallery-img"
-              />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="https://via.placeholder.com/400x400"
-                alt="Couple Photo 4"
-                class="gallery-img"
-              />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="https://via.placeholder.com/400x600"
-                alt="Couple Photo 5"
-                class="gallery-img"
-              />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="https://via.placeholder.com/400x400"
-                alt="Couple Photo 6"
-                class="gallery-img"
-              />
-            </div>
+            <p class="big-tilda">-</p>
+            <p>
+              Будем благодарны, если вы воздержитесь от криков «Горько!», ведь
+              поцелуй — это знак выражения чувств, он не может быть по заказу.
+            </p>
+            <p class="big-tilda">-</p>
+            <p>
+              Мы бы хотели, чтобы в день нашей свадьбы вы вдоволь повеселились и
+              отдохнули, поэтому мы просим вас заранее подумать о том, с кем вы
+              сможете оставить своих маленьких детей на время праздника.
+            </p>
           </div>
         </div>
       </section>
@@ -259,10 +238,19 @@
       <!-- RSVP Section -->
       <section class="rsvp" id="rsvp">
         <div class="container">
-          <h2 class="section-title">ATTENDANCE</h2>
+          <!-- <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSeVVDBj9hISWQ8Q2ve74xy3ekrL3FnfQ8lxGRyB6ZKlo15Yyg/viewform?embedded=true"
+            width="640"
+            height="1180"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            >Загрузка…</iframe
+          > -->
+          <h2 class="section-title">ПРИСУТСТВИЕ</h2>
           <p class="rsvp-text">
-            Please answer a few questions, this will help us organize the
-            celebration
+            Пожалуйста, ответьте на несколько вопросов, это поможет нам
+            организовать мероприятие
           </p>
           <form class="rsvp-form" id="rsvp-form">
             <div class="form-group">
@@ -270,35 +258,122 @@
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Your Name"
+                placeholder="Ваше имя"
                 required
               />
             </div>
             <div class="form-group">
               <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Your Email"
+                type="phone"
+                id="phone"
+                name="phone"
+                placeholder="Ваш номер телефона"
                 required
               />
             </div>
             <div class="form-group">
-              <select id="attendance" name="attendance" required>
-                <option value="" disabled selected>Will you attend?</option>
-                <option value="yes">Yes, I will attend</option>
-                <option value="no">No, I cannot attend</option>
-              </select>
+              <div class="radio-group" id="attendance">
+                <p class="radio-group-label">
+                  Планируете ли вы присутствовать?
+                </p>
+                <div class="radio-option">
+                  <input
+                    type="radio"
+                    id="attend-yes"
+                    name="attendance"
+                    value="yes"
+                    required
+                  />
+                  <label for="attend-yes">Да, я приду</label>
+                </div>
+                <div class="radio-option">
+                  <input
+                    type="radio"
+                    id="attend-plus"
+                    name="attendance"
+                    value="yes-plus"
+                  />
+                  <label for="attend-plus"
+                    >Да, я приду со второй половинкой</label
+                  >
+                </div>
+                <div class="radio-option">
+                  <input
+                    type="radio"
+                    id="attend-no"
+                    name="attendance"
+                    value="no"
+                  />
+                  <label for="attend-no">Нет, я не смогу прийти</label>
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Any special requests or messages for the couple?"
-              ></textarea>
+              <div class="checkbox-group" id="drinks">
+                <p class="checkbox-group-label">
+                  Какие напитки вы предпочитаете?
+                </p>
+                <div class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="drink-wine-white"
+                    name="drinks"
+                    value="wine"
+                  />
+                  <label for="drink-wine">Вино белое</label>
+                </div>
+                <div class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="drink-wine-red"
+                    name="drinks"
+                    value="wine"
+                  />
+                  <label for="drink-wine">Вино красное</label>
+                </div>
+                <div class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="drink-champagne"
+                    name="drinks"
+                    value="champagne"
+                  />
+                  <label for="drink-champagne">Шампанское</label>
+                </div>
+                <div class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="drink-whiskey"
+                    name="drinks"
+                    value="whiskey"
+                  />
+                  <label for="drink-whiskey">Виски</label>
+                </div>
+                <div class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="drink-cognac"
+                    name="drinks"
+                    value="cognac"
+                  />
+                  <label for="drink-cognac">Коньяк</label>
+                </div>
+                <div class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="drink-nonalcoholic"
+                    name="drinks"
+                    value="nonalcoholic"
+                  />
+                  <label for="drink-nonalcoholic">Безалкогольные напитки</label>
+                </div>
+              </div>
             </div>
+            <p class="rsvp-text rsvp-text-bottom">
+              Просим вас дать ответ о своем присутствии до 01.08.2025
+            </p>
             <div class="form-group">
-              <button type="submit" class="submit-btn">Send</button>
+              <button type="submit" class="submit-btn">Отправить</button>
             </div>
           </form>
         </div>
@@ -307,22 +382,17 @@
       <!-- Contact Section -->
       <section class="contact" id="contact">
         <div class="container">
-          <h2 class="section-title">CONTACTS</h2>
+          <h2 class="section-title">КОНТАКТЫ</h2>
           <p class="contact-text">
-            If you have prepared a surprise for us, don't forget to notify our
-            wedding organizer
+            Если вы приготовили для нас сюрприз, не забудьте предупредить об
+            этом нашего свадебного организатора Ирину.
           </p>
           <div class="contact-details">
             <div class="contact-item">
-              <h3 class="contact-title">Wedding Agency "WEDDING"</h3>
-              <p class="contact-info">Phone: +1 (555) 123-4567</p>
-              <p class="contact-info">Email: info@weddingagency.com</p>
+              <p class="contact-info">
+                Номер телефона: <a href="tel:+79185841755">+7 918 584‑17‑55</a>
+              </p>
             </div>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-link">Instagram</a>
-            <a href="#" class="social-link">Telegram</a>
-            <a href="#" class="social-link">WhatsApp</a>
           </div>
         </div>
       </section>
@@ -330,7 +400,7 @@
       <!-- Footer Section -->
       <footer class="footer">
         <div class="container">
-          <p class="footer-text">SEE YOU SOON!</p>
+          <p class="footer-text">ДО СКОРОЙ ВСТРЕЧИ!</p>
         </div>
       </footer>
     </div>
@@ -341,5 +411,21 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+      ymaps.ready(init);
+      function init() {
+        // Координаты получены через геокодер Яндекс Карт
+        var myMap = new ymaps.Map("map", {
+          center: [47.191031, 39.801536], // Центр карты — ул. Чемордачка, 4А
+          zoom: 16,
+        });
+
+        var myPlacemark = new ymaps.Placemark([47.191031, 39.801536], {
+          balloonContent: "ул. Чемордачка, 4А, Ростов-на-Дону",
+        });
+
+        myMap.geoObjects.add(myPlacemark);
+      }
+    </script>
   </body>
 </html>

@@ -104,38 +104,115 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // RSVP Form Submission
-  const rsvpForm = document.getElementById("rsvp-form");
-  if (rsvpForm) {
-    rsvpForm.addEventListener("submit", function (e) {
+  // const rsvpForm = document.getElementById("rsvp-form");
+  // if (rsvpForm) {
+  //   rsvpForm.addEventListener("submit", function (e) {
+  //     e.preventDefault();
+
+  //     // Get form data
+  //     const formData = {
+  //       name: document.getElementById("name").value,
+  //       email: document.getElementById("email").value,
+  //       attendance: document.getElementById("attendance").value,
+  //       message: document.getElementById("message").value,
+  //     };
+
+  //     // Here you would typically send the data to a server
+  //     // For this example, we'll just show a success message
+
+  //     // Clear form
+  //     rsvpForm.reset();
+
+  //     // Show success message
+  //     const formGroup = document.createElement("div");
+  //     formGroup.className = "form-group";
+  //     formGroup.innerHTML =
+  //       '<p style="color: #d4b78f; font-weight: 500;">Thank you for your response!</p>';
+
+  //     rsvpForm.innerHTML = "";
+  //     rsvpForm.appendChild(formGroup);
+
+  //     // Log form data to console (for demonstration)
+  //     console.log("Form submitted:", formData);
+  //   });
+  // }
+
+  document
+    .getElementById("rsvp-form")
+    .addEventListener("submit", async function (e) {
       e.preventDefault();
+      const form = e.target;
 
-      // Get form data
-      const formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        attendance: document.getElementById("attendance").value,
-        message: document.getElementById("message").value,
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      // Отключаем кнопку и форму
+      submitButton.disabled = true;
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      const attendanceValue =
+        document.querySelector('input[name="attendance"]:checked')?.value ||
+        "Не выбрано";
+      const attendanceLabel =
+        {
+          yes: "Да, я приду",
+          "yes-plus": "Да, я приду со второй половинкой",
+          no: "Нет, я не смогу прийти",
+        }[attendanceValue] || "Не выбрано";
+
+      const drinkElements = document.querySelectorAll(
+        'input[name="drinks"]:checked'
+      );
+      const drinkLabels = {
+        wine: "Вино",
+        champagne: "Шампанское",
+        whiskey: "Виски",
+        cognac: "Коньяк",
+        nonalcoholic: "Безалкогольные напитки",
       };
+      const drinks =
+        Array.from(drinkElements)
+          .map((input) => drinkLabels[input.value] || input.value)
+          .join(", ") || "Не выбрано";
 
-      // Here you would typically send the data to a server
-      // For this example, we'll just show a success message
+      const message = `
+📩 Новая заявка:
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+✅ Присутствие: ${attendanceLabel}
+🍷 Напитки: ${drinks}
+    `;
 
-      // Clear form
-      rsvpForm.reset();
+      const TOKEN = "8190811426:AAEvOiOTYPOzIDmWzstPCAnLo_y5gDFJkRw"; // ← Вставь сюда токен
+      const CHAT_ID_DANIEL = "429385818"; // ← Вставь сюда chat_id
+      const CHAT_ID_DARIA = "772094488"; // ← Вставь сюда chat_id
 
-      // Show success message
-      const formGroup = document.createElement("div");
-      formGroup.className = "form-group";
-      formGroup.innerHTML =
-        '<p style="color: #d4b78f; font-weight: 500;">Thank you for your response!</p>';
+      try {
+        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID_DANIEL,
+            text: message.trim(),
+          }),
+        });
 
-      rsvpForm.innerHTML = "";
-      rsvpForm.appendChild(formGroup);
+        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID_DARIA,
+            text: message.trim(),
+          }),
+        });
+      } catch (err) {
+        console.error("Ошибка отправки в Telegram:", err);
+      }
 
-      // Log form data to console (for demonstration)
-      console.log("Form submitted:", formData);
+      submitButton.disabled = false;
+      form.reset();
     });
-  }
 
   // Reveal animations on scroll
   function revealOnScroll() {

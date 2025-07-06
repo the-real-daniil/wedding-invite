@@ -179,8 +179,8 @@ section {
 /* Hero Section */
 .hero {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./assets/main_bg3.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -385,6 +385,27 @@ section {
   flex-wrap: wrap;
 }
 
+.location-text {
+  padding-bottom: 30px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.location-details img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  object-fit: cover;
+  display: block;
+}
+
+.location-details img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
 .location-item {
   flex: 1;
   min-width: 300px;
@@ -392,14 +413,17 @@ section {
   padding: 20px;
 }
 
-.location-title {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: #d4b78f;
+#map {
+  width: 100%;
+  height: 400px;
 }
 
 .location-address {
+  padding-top: 30px;
   line-height: 1.8;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Schedule Section */
@@ -408,37 +432,106 @@ section {
 }
 
 .timeline {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
+  position: relative;
+  padding: 40px 0 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: #333;
+  transform: translateX(-50%);
 }
 
 .timeline-item {
-  display: flex;
-  margin-bottom: 30px;
   position: relative;
+  margin-bottom: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.timeline-item::before {
-  content: "";
+.timeline-item.left {
+  align-items: flex-start;
+  padding-right: 50px;
+  padding-left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  align-items: flex-end;
+  padding-left: 50px;
+  padding-right: 0;
+  text-align: left;
+}
+
+.timeline-dot {
   position: absolute;
-  left: 120px;
-  top: 50%;
-  width: 30px;
-  height: 1px;
-  background-color: #d4b78f;
+  top: 30px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: #333;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .timeline-time {
-  width: 120px;
-  font-weight: 500;
-  color: #d4b78f;
-  text-align: right;
-  padding-right: 50px;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 5px;
+  font-family: "Cormorant Garamond", serif;
 }
 
 .timeline-content {
-  flex: 1;
-  padding-left: 50px;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.timeline-item.left .timeline-time,
+.timeline-item.left .timeline-content {
+  padding-right: 30px;
+}
+
+.timeline-item.right .timeline-time,
+.timeline-item.right .timeline-content {
+  padding-left: 30px;
+}
+
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 30px;
+  }
+
+  .timeline-dot {
+    left: 30px;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    padding-left: 60px;
+    padding-right: 0;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .timeline-item.left .timeline-time,
+  .timeline-item.left .timeline-content,
+  .timeline-item.right .timeline-time,
+  .timeline-item.right .timeline-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .timeline-time {
+    font-size: 2.5rem;
+  }
 }
 
 /* Dress Code Section */
@@ -451,6 +544,21 @@ section {
   max-width: 800px;
   margin: 0 auto 40px;
   font-size: 1.2rem;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 40px;
+  max-width: 400px;
+}
+
+.color-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dress-code-details {
@@ -473,6 +581,10 @@ section {
 .wishes {
   background-color: #f9f7f5;
   text-align: center;
+}
+
+.big-tilda {
+  font-size: 2.5rem !important;
 }
 
 .wishes-content {
@@ -521,13 +633,18 @@ section {
 
 /* RSVP Section */
 .rsvp {
-  background-color: #f9f7f5;
+  background-color: #fff;
   text-align: center;
 }
 
 .rsvp-text {
   max-width: 600px;
   margin: 0 auto 40px;
+}
+
+.rsvp-text.rsvp-text-bottom {
+  text-align: left;
+  margin-top: 40px;
 }
 
 .rsvp-form {
@@ -539,7 +656,7 @@ section {
   margin-bottom: 20px;
 }
 
-input,
+input:not([type="radio"]):not([type="checkbox"]),
 select,
 textarea {
   width: 100%;
@@ -552,11 +669,86 @@ textarea {
   transition: border-color 0.3s ease;
 }
 
-input:focus,
+input:not([type="radio"]):focus,
 select:focus,
 textarea:focus {
   outline: none;
   border-color: #d4b78f;
+}
+
+.radio-group,
+.checkbox-group {
+  text-align: left;
+  padding: 10px 0 0;
+}
+
+.radio-group-label,
+.checkbox-group-label {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.radio-option,
+.checkbox-option {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.radio-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: #d4b78f;
+  border-width: 5px;
+}
+
+.checkbox-option input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkbox-option input[type="checkbox"]:checked {
+  background-color: #d4b78f;
+  border-color: #d4b78f;
+}
+
+.checkbox-option input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.radio-option label,
+.checkbox-option label {
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 textarea {
@@ -583,7 +775,7 @@ textarea {
 
 /* Contact Section */
 .contact {
-  background-color: #fff;
+  background-color: #f9f7f5;
   text-align: center;
 }
 
@@ -726,6 +918,15 @@ section.revealed {
   .timeline-content {
     padding-left: 30px;
   }
+
+  .location-details {
+    gap: 30px;
+  }
+
+  .location-details img {
+    max-width: 90%;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 480px) {
@@ -759,6 +960,38 @@ section.revealed {
   .location-item,
   .dress-code-item {
     min-width: 100%;
+  }
+
+  .location-details img {
+    max-width: 100%;
+    margin: 0 auto 20px;
+    border-radius: 6px;
+  }
+
+  .color-palette {
+    gap: 8px;
+    max-width: 300px;
+  }
+
+  .color-box {
+    width: 60px;
+    height: 60px;
+  }
+
+  .radio-option,
+  .checkbox-option {
+    margin-bottom: 15px;
+  }
+
+  .radio-option input[type="radio"],
+  .checkbox-option input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+  }
+
+  .checkbox-option input[type="checkbox"]:checked::after {
+    top: 6px;
+    left: 8px;
   }
 
   .gallery-grid {
