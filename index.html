@@ -228,7 +228,12 @@
             Пожалуйста, ответьте на несколько вопросов, это поможет нам
             организовать мероприятие
           </p>
-          <form class="rsvp-form" id="rsvp-form">
+          <form
+            class="rsvp-form"
+            id="rsvp-form"
+            action="https://formspree.io/f/xeokwwjn"
+            method="POST"
+          >
             <div class="form-group">
               <input
                 type="text"
@@ -294,7 +299,7 @@
                     type="checkbox"
                     id="drink-wine-white"
                     name="drinks"
-                    value="wine"
+                    value="wine-white"
                   />
                   <label for="drink-wine">Вино белое</label>
                 </div>
@@ -303,7 +308,7 @@
                     type="checkbox"
                     id="drink-wine-red"
                     name="drinks"
-                    value="wine"
+                    value="wine-red"
                   />
                   <label for="drink-wine">Вино красное</label>
                 </div>

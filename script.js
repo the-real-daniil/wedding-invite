@@ -27,51 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }, 20);
 
-  // Navigation Menu Toggle
-  const navMenu = document.querySelector(".nav-menu");
-  const navToggle = document.querySelector(".nav-toggle");
-  const navLinks = document.querySelectorAll(".nav-links a");
-
-  if (navToggle) {
-    navToggle.addEventListener("click", function () {
-      navMenu.classList.toggle("active");
-    });
-  }
-
-  // Close menu when clicking outside
-  document.addEventListener("click", function (e) {
-    if (
-      navMenu &&
-      navMenu.classList.contains("active") &&
-      !navMenu.contains(e.target) &&
-      e.target !== navToggle
-    ) {
-      navMenu.classList.remove("active");
-    }
-  });
-
-  // Close menu when link is clicked
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      navMenu.classList.remove("active");
-    });
-  });
-
-  // Change nav background on scroll
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 100) {
-      navToggle.querySelectorAll("span").forEach((span) => {
-        span.style.backgroundColor = "#333";
-      });
-    } else {
-      navToggle.querySelectorAll("span").forEach((span) => {
-        span.style.backgroundColor = "#fff";
-      });
-    }
-  });
-
-  // Calendar is static, no JavaScript needed for it
-
   // Smooth Scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
@@ -104,38 +59,69 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // RSVP Form Submission
-  // const rsvpForm = document.getElementById("rsvp-form");
-  // if (rsvpForm) {
-  //   rsvpForm.addEventListener("submit", function (e) {
-  //     e.preventDefault();
+  document
+    .getElementById("rsvp-form")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-  //     // Get form data
-  //     const formData = {
-  //       name: document.getElementById("name").value,
-  //       email: document.getElementById("email").value,
-  //       attendance: document.getElementById("attendance").value,
-  //       message: document.getElementById("message").value,
-  //     };
+      const submitBtn = this.querySelector(".submit-btn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Отправка...";
 
-  //     // Here you would typically send the data to a server
-  //     // For this example, we'll just show a success message
+      // Получаем данные формы
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const attendance =
+        document.querySelector('input[name="attendance"]:checked')?.value || "";
 
-  //     // Clear form
-  //     rsvpForm.reset();
+      const drinks = Array.from(
+        document.querySelectorAll('input[name="drinks"]:checked')
+      ).map((input) => input.nextElementSibling.innerText.trim());
 
-  //     // Show success message
-  //     const formGroup = document.createElement("div");
-  //     formGroup.className = "form-group";
-  //     formGroup.innerHTML =
-  //       '<p style="color: #d4b78f; font-weight: 500;">Thank you for your response!</p>';
+      // Подготовка тела запроса
+      const data = {
+        records: [
+          {
+            fields: {
+              Name: name,
+              Phone: phone,
+              Attendance: attendance,
+              Drinks: drinks.join(", "),
+            },
+          },
+        ],
+      };
 
-  //     rsvpForm.innerHTML = "";
-  //     rsvpForm.appendChild(formGroup);
+      try {
+        const response = await fetch(
+          "https://api.airtable.com/v0/appG4sTMdrZKJdceF/Guests",
+          {
+            method: "POST",
+            headers: {
+              Authorization:
+                "Bearer patiBJW61SZu9XoMr.ba289e06d6ea2613298bebc9c2c328d0166c5f2d606c927dd65bb4da0eade0c8",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-  //     // Log form data to console (for demonstration)
-  //     console.log("Form submitted:", formData);
-  //   });
-  // }
+        if (response.ok) {
+          alert("Спасибо! Данные отправлены.");
+          this.reset();
+        } else {
+          const error = await response.json();
+          console.error(error);
+          alert("Ошибка при отправке. Проверь консоль.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Ошибка сети или сервера.");
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Отправить";
+    });
 
   document
     .getElementById("rsvp-form")
@@ -165,7 +151,8 @@ document.addEventListener("DOMContentLoaded", function () {
         'input[name="drinks"]:checked'
       );
       const drinkLabels = {
-        wine: "Вино",
+        "wine-white": "Вино белое",
+        "wine-red": "Вино красное",
         champagne: "Шампанское",
         whiskey: "Виски",
         cognac: "Коньяк",
@@ -177,12 +164,12 @@ document.addEventListener("DOMContentLoaded", function () {
           .join(", ") || "Не выбрано";
 
       const message = `
-📩 Новая заявка:
-👤 Имя: ${name}
-📞 Телефон: ${phone}
-✅ Присутствие: ${attendanceLabel}
-🍷 Напитки: ${drinks}
-    `;
+  📩 Новая заявка:
+  👤 Имя: ${name}
+  📞 Телефон: ${phone}
+  ✅ Присутствие: ${attendanceLabel}
+  🍷 Напитки: ${drinks}
+      `;
 
       const TOKEN = "8190811426:AAEvOiOTYPOzIDmWzstPCAnLo_y5gDFJkRw"; // ← Вставь сюда токен
       const CHAT_ID_DANIEL = "429385818"; // ← Вставь сюда chat_id
